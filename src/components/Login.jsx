@@ -3,8 +3,8 @@ import { auth, db } from "../firebase";
 import { withRouter } from "react-router-dom";
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [email, setEmail] = useState("test@test.com");
+  const [pass, setPass] = useState("123123");
   const [error, setError] = useState(null);
   const [isRegister, setIsRegister] = useState(true);
 
@@ -62,7 +62,10 @@ const Login = (props) => {
         email: res.user.email,
         uid: res.user.uid,
       });
-
+      await db.collection(res.user.uid).add({
+        name: "Example task",
+        date: Date.now(),
+      });
       setEmail("");
       setPass("");
       setError(null);
@@ -85,7 +88,7 @@ const Login = (props) => {
       </h3>
       <hr />
       <div className="row justify-content-center">
-        <div className="col-12 col-sm-8 col-md-6 col-xl-4">
+        <div className="col-12 col-sm-8 col-md-6 col-xl-4 text-center">
           <form onSubmit={processData} autoComplete="on">
             {error && <div className="alert alert-danger">{error}</div>}
             <input
@@ -113,6 +116,13 @@ const Login = (props) => {
             >
               {isRegister ? "Ya tienes cuenta?" : "No tienes cuenta?"}
             </button>
+            {!isRegister?(<button
+              onClick={() => props.history.push('/reset')}
+              type="button"
+              className="btn btn-danger btn-sm mt-2"
+            >
+              Recuperar contrasena{" "}
+            </button>):null}
           </form>
         </div>
       </div>

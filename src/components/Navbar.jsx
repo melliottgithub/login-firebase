@@ -22,7 +22,7 @@ const Navbar = (props) => {
           {props.fbUser !== null ? (
             <NavLink className="btn btn-dark mr-2" to="/admin">
              Virtual
-            </NavLink>
+            </NavLink> 
           ) : null}
           {props.fbUser !== null ? (
             <button onClick={() => logout()} className="btn btn-dark">

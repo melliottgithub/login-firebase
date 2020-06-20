@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Admin from "./components/Admin";
 import { auth } from "./firebase";
+import Reset from "./components/Reset";
 
 function App() {
   const [fbUser, setFbUser] = useState(false);
@@ -27,6 +28,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login></Login>
+          </Route>
+          <Route path="/reset">
+            <Reset></Reset>
           </Route>
           <Route path="/admin">
             <Admin></Admin>
